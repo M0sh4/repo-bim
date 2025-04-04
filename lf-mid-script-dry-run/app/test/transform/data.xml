@@ -1,0 +1,12 @@
+<paymentrequest>
+    <sendingfri>FRI:51942074622/MSISDN</sendingfri>
+    <receivingfri>
+        FRI:10053738350@sunat/SP</receivingfri>
+    <amount>
+        <amount>19.0</amount>
+        <currency>PEN</currency>
+    </amount>
+    <sendernote>102024@1.0</sendernote>
+    <receivermessage>
+        500.0@1@500.0</receivermessage>
+</paymentrequest>

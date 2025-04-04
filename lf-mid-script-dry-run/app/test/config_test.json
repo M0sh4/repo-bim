@@ -1,0 +1,166 @@
+{
+    "getbalance": {
+        "config_request" : {
+            "extract_ewp":"fri",
+            "deleted_words": "FRI:",
+            "split_words":"/",
+            "mapping":{
+                "map_idType": "fri/1",
+                "map_idValue": "fri/0"
+            }
+        },
+        "request": {
+            "api_name": "api_ums_user_wallet_balance",
+            "Authorization": "Bearer map_token",
+            "data": {
+                "currency": "101",
+                "openingBalanceReq": "Y",
+                "language": "en",
+                "user": {
+                    "idType": "map_idType",
+                    "workspace": "SUBSCRIBER",
+                    "idValue": "map_idValue"
+                },
+                "isChildDataRequired": "N",
+                "isDefaultAccountGroupRequired": "Y",
+                "isUserAccountDataRequired": "Y",
+                "perPage": 5,
+                "pageNumber": 1
+            }
+        },
+        "response": {
+            "mapping":{
+                "balance_currency": "accountGroupDetails_accountDetails_currencyName",
+                "balance_amount": "accountGroupDetails_accountDetails_balances_balance"
+            }
+        }
+    },
+    "getaccounts": {
+        "config_request" : {
+            "extract_ewp":"identity",
+            "deleted_words": "ID:",
+            "split_words":"/",
+            "mapping":{
+                "map_idType": "identity/1",
+                "map_idValue": "identity/0"
+            }
+        },
+        "request": {
+            "api_name": "api_ums_user_account_detail_enquiry",
+            "Authorization": "Bearer map_token",
+            "data": {
+                "workspace": "SUBSCRIBER",
+                "identifierType": "map_idType",
+                "identifierValue": "map_idValue",
+                "includes": "accountDetails"
+            }
+        },
+        "response": {
+            "mapping":{
+                "accountslist_account_fri": "",
+                "accountslist_account_accountstatus": "accountGroupDetails_accountDetails_accountStatus",
+                "accountslist_account_accounttype":"",
+                "accountslist_account_profilename":"accountGroupDetails_accountDetails_gradeName",
+                "accountslist_account_balance_amount":"accountGroupDetails_accountDetails_balances",
+                "accountslist_account_balance_currency":"accountGroupDetails_accountDetails_currencyName",
+                "accountslist_account_committedbalance_amount": "accountGroupDetails_accountDetails_balances",
+                "accountslist_account_committedbalance_currency": "accountGroupDetails_accountDetails_currencyName",
+                "accountslist_account_totalreservation_amount": "accountGroupDetails_accountDetails_balances",
+                "accountslist_account_totalreservation_currency": "accountGroupDetails_accountDetails_currencyName",
+                "accountslist_account_totalpositivereservation_amount": "",
+                "accountslist_account_totalpositivereservation_currency": "accountGroupDetails_accountDetails_currencyName",
+                "accountslist_account_bankdomainname": ""
+            },
+            "response_ewp":"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ns5:getaccountsresponse xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n    xmlns:prc=\"http://www.ericsson.com/em/emm/provisioning/v1_0/common\"\n    xmlns:op=\"http://www.ericsson.com/em/emm/v1_0/common\"\n    xmlns:ns5=\"http://www.ericsson.com/em/emm/provisioning/v1_0\">\n    <accountslist>\n        <account>\n            <fri>FRI:3229548/MM</fri>\n            <accountstatus>ACTIVE</accountstatus>\n            <accounttype>MOBILE_MONEY</accounttype>\n            <profilename>FCOMPARTAMOS Normal General Account Profile</profilename>\n            <balance>\n                <amount>27.20</amount>\n                <currency>PEN</currency>\n            </balance>\n            <committedbalance>\n                <amount>27.20</amount>\n                <currency>PEN</currency>\n            </committedbalance>\n            <totalreservation>\n                <amount>0.00</amount>\n                <currency>PEN</currency>\n            </totalreservation>\n            <totalpositivereservation>\n                <amount>0.00</amount>\n                <currency>PEN</currency>\n            </totalpositivereservation>\n            <bankdomainname>FCOMPARTAMOS</bankdomainname>\n        </account>\n    </accountslist>\n</ns5:getaccountsresponse>"
+        }
+    },
+    "getaccountholderemail": {
+        "config_request" : {
+            "extract_ewp":"identity",
+            "deleted_words": "ID:",
+            "split_words":"/",
+            "mapping":{
+                "map_idType": "identity/1",
+                "map_idValue": "identity/0"
+            }
+        },
+        "request": {
+            "api_name": "api_ums_user_account_detail_enquiry",
+            "Authorization": "Bearer map_token",
+            "data": {
+                "workspace": "SUBSCRIBER",
+                "identifierType": "map_idType",
+                "identifierValue": "map_idValue",
+                "includes": "accountDetails"
+            }
+        },
+        "response": {
+            "mapping":{
+                "email": "userDetails_profileDetails_emailId"
+            }
+        }
+    },
+    "getaccountholderpersonalinformation": {
+        "config_request" : {
+            "extract_ewp":"identity",
+            "deleted_words": "ID:",
+            "split_words":"/",
+            "mapping":{
+                "map_idType": "identity/1",
+                "map_idValue": "identity/0"
+            }
+        },
+        "request": {
+            "api_name": "api_ums_user_account_detail_enquiry",
+            "Authorization": "Bearer map_token",
+            "data": {
+                "workspace": "SUBSCRIBER",
+                "identifierType": "map_idType",
+                "identifierValue": "map_idValue",
+                "includes": "accountDetails"
+            }
+        },
+        "response": {
+            "mapping":{
+                "information_name_firstname":"userDetails_profileDetails_firstName",
+                "information_name_surname":"userDetails_profileDetails_lastName",
+                "information_language":"userDetails_profileDetails_language",
+                "information_birth_date":"userDetails_profileDetails_dateOfBirth",
+                "information_birth_country":"userDetails_profileDetails_countryName",
+                "information_birth_province":"userDetails_profileDetails_stateDisplayValue",
+                "information_birth_city":"userDetails_profileDetails_districtDisplayValue",
+                "information_occupation_profession":"",
+                "information_residentialstatus":""
+            }
+        }
+    },
+    "transfer": {
+        "config_request" : {
+            "extract_ewp":"identity",
+            "deleted_words": "FRI:",
+            "split_words":"/",
+            "mapping":{
+                "map_receiver_idType": "receivingfri/1",
+                "map_receiver_idValue": "receivingfri/0",
+                "map_sender_idType": "sendingfri/1",
+                "map_sender_idValue": "sendingfri/0",
+                "map_amount": "amount",
+                "map_sendernote": "sendernote",
+                "map_receivermessage": "receivermessage"
+            }
+        },
+        "request": {
+            "api_name": "api_ums_user_account_detail_enquiry",
+            "Authorization": "Bearer map_token",
+            "data": {
+                "workspace": "map_receiver_idType",
+                "identifierType": "map_sender_idType",
+                "identifierValue": "map_sender_idValue",
+                "includes": "map_amount"
+            }
+        },
+        "response": {
+
+        }
+    }
+}

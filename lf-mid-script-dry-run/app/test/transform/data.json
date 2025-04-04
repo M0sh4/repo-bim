@@ -1,0 +1,74 @@
+{
+    "VIRTUALINTEROP2" :{
+        "usuario": "AgenteNiubiz",
+        "password": "Comv23@AFa",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987008"
+    },
+    "VIRTUALINTEROPCFCCE":{
+        "usuario": "VIRTUALINTEROPCFCCE",
+        "password": "C2E@Agen1",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51963564251"
+    },
+    "AgenteBNacion":{ 
+        "usuario": "AgenteFCompartamos",
+        "password": "Comv23@AFn", 
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987005" 
+    },
+    "AgenteFCompartamos":{
+        "usuario": "AgenteFCompartamos", 
+        "password": "Comv23@AFn",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987005"
+    },
+    "AgenteKasnet":{
+        "usuario": "AgenteKasnet",
+        "password": "Pdp@310726",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987001"
+    },
+    "atmcompartamos":{
+        "usuario": "AgenteFCompartamos", 
+        "password": "Comv23@AFn",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987005"
+    },
+    "atmfullcargas":{
+        "usuario": "AgenteFCompartamos", 
+        "password": "Comv23@AFn",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51987987005"
+    },
+    "cashout":{
+        "usuario": "VIRTUALINTEROPCFCCE",
+        "password": "C2E@Agen1",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51963564251"
+    },
+    "cashin":{
+        "usuario": "VIRTUALINTEROPCFCCE",
+        "password": "C2E@Agen1",
+        "workspace": "BUSINESS",
+        "identifier_type": "LOGINID",
+        "authentication_type": "PASSWORD",
+        "msisdn": "51963564251"
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Dry Run</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: red;
+            color: white;
+        }
+        .value {
+            text-align: right; /* Alinear valores a la derecha */
+            color: black; /* Color negro para los valores */
+        }
+        .header-value {
+            background-color: red; /* Pintar de rojo */
+            color: white; /* Texto blanco */
+        }
+    </style>
+</head>
+<body>
+    <h1>DRY RUN</h1>
+    <h2>Summary</h2>
+    <table>
+        <tr>
+            <td class="header-value">Fecha</td>
+            <td class="value">{{ fecha }}</td>
+        </tr>
+        <tr>
+            <td class="header-value">Resultados Esperados</td>
+            <td class="value">{{ resultados_esperados }}</td>
+        </tr>
+        <tr>
+            <td class="header-value">Resultados Obtenidos Exitosos</td>
+            <td class="value">{{ resultados_exitosos }}</td>
+        </tr>
+        <tr>
+            <td class="header-value">Resultados Obtenidos con Errores</td>
+            <td class="value">{{ resultados_errores }}</td>
+        </tr>
+    </table>
+
+    <h2>Detalle de los Errores</h2>
+    <table>
+        <tr>
+            <th>N</th>
+            <th>Funcionalidad</th>
+            <th>API EWP</th>
+            <th>API COMVIVA</th>
+            <th>Campo EWP</th>
+            <th>Campo COMVIVA</th>
+            <th>Tiempo api sender Comviva</th>
+            <th>Tiempo Total</th>
+        </tr>
+        
+        {% for error in detalles_errores %}
+        <tr>
+            <td rowspan="{{ error.num_campos }}">{{ error.numero }}</td>
+            <td rowspan="{{ error.num_campos }}">{{ error.funcionalidad }}</td>
+            <td rowspan="{{ error.num_campos }}">{{ error.api_ewp }}</td>
+            <td rowspan="{{ error.num_campos }}">{{ error.api_comviva }}</td>
+            <td>{{ error.campos[0].campo_ewp }}</td>
+            <td>{{ error.campos[0].campo_comviva }}</td>
+            <td rowspan="{{ error.num_campos }}">{{ error.time_request_comviva }}</td>
+            <td rowspan="{{ error.num_campos }}">{{ error.time_execution }}</td>
+        </tr>
+        {% for campo in error.campos[1:] %}
+        <tr>
+            <td>{{ campo.campo_ewp }}</td>
+            <td>{{ campo.campo_comviva }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </table>
+</body>
+</html>

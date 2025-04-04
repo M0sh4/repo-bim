@@ -1,0 +1,15 @@
+sendingfri      	 FRI:51942074622/MSISDN
+    data.sender.idValue              	 51935287712
+receivingfri    	 
+        FRI:10053738350@sunat/SP
+
+amount.amount   	 19.0
+    data.transactionAmount           	 20.0
+
+
+amount.currency 	 PEN
+
+sendernote      	 102024@1.0
+    data.partnerData.sendernote      	 092024@0.0
+receivermessage 	 500.0@1@500.0
+    data.partnerData.receivermessage 	 5000.0@1@1000.0
