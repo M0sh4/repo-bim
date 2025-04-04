@@ -7,7 +7,7 @@ from report import generate
 SMTP_SERVER = "smtp.gmail.com"  # Cambia esto si usas otro proveedor (ejemplo: Outlook: smtp.office365.com)
 SMTP_PORT = 587  # Usar 465 para SSL o 587 para TLS
 EMAIL_USER = "enviocorreosdr@gmail.com"  # Reemplázalo con tu correo
-EMAIL_PASSWORD = "ldrk ybwd sbmq nsbh"  # Tu contraseña de aplicación
+EMAIL_PASSWORD = ""  # Tu contraseña de aplicación
 
 # Configuración del correo electrónico
 def enviar(destinatario, asunto, cc):
