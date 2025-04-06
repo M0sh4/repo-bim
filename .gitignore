@@ -1,0 +1,7 @@
+# Ignorar carpetas de versiones, capturas y reportes
+automatizar_evidencias/versions/jsons/
+automatizar_evidencias/screenshots/
+automatizar_evidencias/reports/documento_funcional/
+
+# Ignorar archivo de log de versiones
+automatizar_evidencias/versions/version_log.xlsx
