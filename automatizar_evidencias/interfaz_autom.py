@@ -412,19 +412,82 @@ class ReportEditorApp:
 
         # Mostrar imagen si ya existe
         if step_data["Foto"]:
-            self.display_screenshot(step_frame, step_data["Foto"])
+            self.display_screenshot(step_frame, step_data["Foto"], step_data)
 
 
-    def display_screenshot(self, frame, file_name):
-        try:
-            image = Image.open(file_name)
-            image.thumbnail((100, 100))
-            photo = ImageTk.PhotoImage(image)
-            label = tk.Label(frame, image=photo)
-            label.image = photo
-            label.pack(side=tk.LEFT, padx=5)
-        except Exception as e:
-            print(f"Error al cargar la imagen: {e}")
+    def display_screenshot(self, frame, file_paths, step_data=None):
+        if not isinstance(file_paths, list):
+            file_paths = [file_paths]
+
+        for file_path in file_paths:
+            try:
+                image_frame = tk.Frame(frame, bg="#F0F0F0", bd=1, relief=tk.SOLID)
+                image_frame.pack(side=tk.LEFT, padx=5, pady=5)
+
+                img = Image.open(file_path)
+                img.thumbnail((100, 100))
+                photo = ImageTk.PhotoImage(img)
+
+                img_label = tk.Label(image_frame, image=photo, cursor="hand2")
+                img_label.image = photo
+                img_label.pack()
+
+                # Doble clic = zoom
+                def open_zoom(event=None, path=file_path):
+                    try:
+                        zoom_win = tk.Toplevel(self.root)
+                        zoom_win.overrideredirect(True)
+                        zoom_win.attributes("-topmost", True)
+                        x = self.root.winfo_pointerx()
+                        y = self.root.winfo_pointery()
+                        zoom_win.geometry(f"+{x}+{y}")
+
+                        img_zoom = Image.open(path)
+                        img_zoom.thumbnail((420, 420))
+                        photo_zoom = ImageTk.PhotoImage(img_zoom)
+
+                        zoom_label = tk.Label(zoom_win, image=photo_zoom, bd=2, relief="solid")
+                        zoom_label.image = photo_zoom
+                        zoom_label.pack()
+
+                        zoom_label.bind("<Leave>", lambda e: zoom_win.destroy())
+                    except Exception as e:
+                        print(f"❌ No se pudo abrir zoom: {e}")
+
+                img_label.bind("<Double-Button-1>", open_zoom)
+
+                # Eliminar imagen del frame y del disco
+                def eliminar(path=file_path, container=image_frame):
+                    try:
+                        # 1. Eliminar imagen física
+                        if os.path.exists(path):
+                            os.remove(path)
+                            print(f"🗑 Imagen eliminada del disco: {path}")
+
+                        # 2. Eliminar visualmente de la interfaz
+                        container.destroy()
+
+                        # 3. Eliminar del JSON
+                        if step_data and "Foto" in step_data:
+                            if path in step_data["Foto"]:
+                                step_data["Foto"].remove(path)
+                                print(f"🧹 Imagen eliminada del JSON: {path}")
+                                self.generar_documento()
+
+                    except Exception as e:
+                        print(f"❌ Error al eliminar imagen: {e}")
+
+                btn_eliminar = tk.Button(
+                    image_frame,
+                    text="❌",
+                    command=lambda p=file_path, c=image_frame: eliminar(p, c),
+                    bg="#FF4C4C", fg="white", font=("Verdana", 8, "bold")
+                )
+                btn_eliminar.place(relx=1, rely=0, anchor="ne")
+
+            except Exception as e:
+                print(f"❌ Error al cargar imagen: {file_path} → {e}")
+
 
     def mark_as_modified(self, widget):
         widget.config(bg="#FFCC99")

@@ -1,0 +1,32 @@
+fields @timestamp, @message, @logStream
+| filter @message like ') Execution time:' 
+  and @message like '[ INFO] - [lambda_function:69]'
+| parse @message "(*) Execution time: *, *" as api_name, execution_time, http_code_raw
+| filter ispresent(api_name) 
+| stats 
+    count() as cantidad_total,
+    sum(if(execution_time >= 27, 1, 0)) as over_27_seconds,
+    sum(if(trim(http_code_raw) = "200", 1, 0)) as _200,
+    sum(if(trim(http_code_raw) = "400", 1, 0)) as _400,
+    sum(if(trim(http_code_raw) = "401", 1, 0)) as _401,
+    sum(if(trim(http_code_raw) = "402", 1, 0)) as _402,
+    sum(if(trim(http_code_raw) = "420", 1, 0)) as _420,
+    sum(if(trim(http_code_raw) = "500", 1, 0)) as _500,
+    sum(if(trim(http_code_raw) = "503", 1, 0)) as _503,
+    sum(if(trim(http_code_raw) != "200"
+          and trim(http_code_raw) != "200"
+          and trim(http_code_raw) != "400"
+          and trim(http_code_raw) != "401"
+          and trim(http_code_raw) != "402"
+          and trim(http_code_raw) != "420"
+          and trim(http_code_raw) != "500"
+          and trim(http_code_raw) != "503"
+    , 1, 0)) as otros,
+    min(execution_time) as min_latency,
+    max(execution_time) as max_latency,
+    avg(execution_time) as avg_latency,
+    percentile(execution_time, 90) as p90_latency,
+    percentile(execution_time, 95) as p95_latency,
+    percentile(execution_time, 99) as p99_latency
+by api_name
+| sort cantidad_total desc
