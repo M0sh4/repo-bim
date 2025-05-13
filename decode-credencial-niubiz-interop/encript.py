@@ -6,8 +6,10 @@ import base64_custom as b64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
-import os
+import sys
 from base64 import b64decode
+import hashlib
+
 class CryptoUtil():
 
     def __init__(self):
@@ -66,7 +68,6 @@ class CryptoUtil():
 
         # Devolver el texto desencriptado como una cadena UTF-8
         return plaintext.decode("utf-8")
-import hashlib
 
 def hash_to_32_chars(text):
     # Crear un objeto hash SHA-256
@@ -82,15 +83,16 @@ def hash_to_32_chars(text):
 
  
 # Ejemplo de uso
-text =  b"tEYcwr3SBCvv0xLjI8YEm1SNzpGd46eD/DnOW+msrdf5bXSN"
+# text =  b"tEYcwr3SBCvv0xLjI8YEm1SNzpGd46eD/DnOW+msrdf5bXSN"
 #hash_32bit = hash_to_32_chars(text)
 #print("Hash de 32 bits:", hash_32bit)
-
 semilla = "8bce46c89098407caa76f0cc3bc02274"
 obj = CryptoUtil()
-d = obj.encript_word("VklSVFVBTElOVEVST1BDRkJJTTpEZXZAVUFUIzI1MDExNQ==", semilla)
+if sys.argv[1] == 'encript':
+    d = obj.encript_word(b64.encode_b64(sys.argv[2]), semilla)
 #{"value":"thwy17jBZzzpwDT8IMcih1fWyaeEzKukyyTWWunmudTmVF6N","mobileNumber":"51963897000"}
-print(d)
-d = obj.decript_word("thwy17jBZzzpwDT8IMcih1fWyaeEzKukyynOW+msrdf5bV6N", semilla)
+elif sys.argv[1] == 'decript':
+    d = obj.decript_word(sys.argv[2], semilla)
+    d = b64.decode_b64(d)
 print(d)
 #tj4M0LvGfTfz0R3hOdJG7kCI5Z76lNCSmEQ=
