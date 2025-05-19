@@ -5,3 +5,5 @@ automatizar_evidencias/reports/documento_funcional/
 
 # Ignorar archivo de log de versiones
 automatizar_evidencias/versions/version_log.xlsx
+# Ignorar cualquier carpeta node_modules en cualquier subcarpeta
+**/node_modules/
