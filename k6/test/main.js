@@ -1,11 +1,10 @@
-// test.js
-import stressTest from './requests/stress-test.js';
+import login from './requests/login.js';
 
 export const options = {
-  vus: 50,
-  duration: '10s',
+  vus: 1,
+  duration: '1s',
 };
 
-export default function () {
-  stressTest();
+export default async function () {
+  await login()
 }
