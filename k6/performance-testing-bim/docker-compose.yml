@@ -63,3 +63,4 @@ services:
       - ./data:/scripts/data
       - ./scripts:/scripts/scripts
       - ./utils:/scripts/utils
+      - ./features:/scripts/features

@@ -3,7 +3,9 @@ export const API_ENDPOINTS = {
 };
 
 export const RESOURCES = {
-    LOGIN: 'bykal7c01n'
+    LOGIN: 'bykal7c01n',
+    LISTAR_FAVORITOS_MANDAR_PLATA: '66nuta4hty',
+    VALIDAR_USUARIO_MANDAR_PLATA: '88gta9rjzf'
 }
 
 export const API_KEY = {

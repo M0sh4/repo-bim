@@ -1,4 +1,4 @@
-import login from './scripts/login.js';
+import mandarPlata from './features/mandar-plata.js';
 import { read_data } from './utils/read_data.js'
 import { SharedArray } from 'k6/data';
 
@@ -13,9 +13,9 @@ const users = new SharedArray('users', () => {
 
 
 export const options = {
-  vus: 10,
+  vus: 1,
   // duration: '1s',
-  iterations: 10
+  iterations: 1
 };
 /**
  * Setup context -> Configurar datos para su procesamiento, compartir datos entre VU, se ejecuta solo una vez.
@@ -28,7 +28,7 @@ export const options = {
  * VU code -> Ejecute la función de prueba, Una vez por iteración, tantas veces como lo requieran las opciones de prueba
  */
 export default function () {
-  login(users)
+  mandarPlata(users)
 }
 
 /**

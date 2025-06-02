@@ -2,6 +2,7 @@ import { check } from 'k6';
 import http from 'k6/http';
 import { API_ENDPOINTS, RESOURCES, API_KEY, AES } from '../config/default.js';
 import { buildBasicAuthHeader } from '../utils/aes_encrypt.js';
+import { log_req_res } from '../utils/log.js'
 
 
 /**
@@ -21,9 +22,16 @@ export default function(users) {
             "x-api-key": API_KEY.OPERATIONS,
             "Content-Type":	"application/json"
         }
-        const res = http.post(API_ENDPOINTS.OPERATIONS + RESOURCES.LOGIN, payload, {headers: headers});
+        const URL = API_ENDPOINTS.OPERATIONS + RESOURCES.LOGIN
+        const res = http.post(URL, payload, {headers: headers});
         check(res, {
             'status is 200': () => res.status === 200,
         });
+
+
+        // Lo imprimimos por stdout en formato JSON
+        log_req_res({"URL": URL, "payload": payload, "headers": headers}, res, "LOGIN")
+        console.log("token: ",res.headers.Token)
+        return res.headers.Token;
     }
 };
